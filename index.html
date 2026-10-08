@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entorno Seguro - Aventura Educativa</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+<header class="top">
+ <div class="max-w-5xl mx-auto px-4 pt-3 pb-3 flex flex-wrap items-center justify-between gap-2">
+  <div class="flex items-center gap-3">
+   <div class="ic" style="width:48px;height:48px;font-size:1.5rem;border-radius:14px"><i data-i="shield"></i></div>
+   <div><h1 class="text-xl md:text-2xl font-bold leading-none">¡Entorno Seguro!</h1><p class="text-xs opacity-75 mt-1">Taller interactivo de 60 minutos · Primaria</p></div>
+  </div>
+  <div class="flex items-center gap-2">
+   <div class="fr bg-white/15 rounded-full px-3 py-1.5 text-sm"><i data-i="clock"></i> <span id="timer-display">60:00</span></div>
+   <button onclick="resetTimer()" title="Reiniciar cronómetro" class="bg-white/15 hover:bg-white/25 rounded-full w-8 h-8 text-sm"><i data-i="refresh"></i></button>
+  </div>
+ </div>
+ <nav class="max-w-5xl mx-auto px-4 pb-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+  <button onclick="switchTab(1)" id="tab-btn-1" class="tab on"><i data-i="book"></i> 1. Intro (10m)</button>
+  <button onclick="switchTab(2)" id="tab-btn-2" class="tab"><i data-i="compass"></i> 2. Explora (20m)</button>
+  <button onclick="switchTab(3)" id="tab-btn-3" class="tab"><i data-i="gamepad"></i> 3. Retos (20m)</button>
+  <button onclick="switchTab(4)" id="tab-btn-4" class="tab"><i data-i="award"></i> 4. Mi Promesa (10m)</button>
+ </nav>
+</header>
+
+<main class="max-w-5xl w-full mx-auto p-4 md:p-6 mb-10">
+
+<!-- FASE 1 -->
+<section id="phase-1" class="phase">
+ <div class="panel">
+  <span class="tag">Fase 1 · Introducción · 10 min</span>
+  <h2 class="text-3xl md:text-4xl font-bold mt-3" style="color:var(--navy)">¿Qué es un Entorno Seguro?</h2>
+  <div class="hero" aria-hidden="true">
+   <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd3f0"/><stop offset="1" stop-color="#e8f7fb"/></linearGradient></defs>
+    <rect width="800" height="300" fill="url(#sky)"/>
+    <g class="rays" stroke="#f4b942" stroke-width="6" stroke-linecap="round"><path d="M690 20v-16M690 120v16M640 70h-16M740 70h16M655 35l-11-11M725 105l11 11M725 35l11-11M655 105l-11 11"/></g>
+    <circle cx="690" cy="70" r="36" fill="#f4b942" stroke="#e39b1b" stroke-width="4"/>
+    <circle cx="678" cy="64" r="4" fill="#1f3a5f"/><circle cx="702" cy="64" r="4" fill="#1f3a5f"/><path d="M676 78q14 12 28 0" stroke="#1f3a5f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g class="cloud" fill="#fff"><ellipse cx="0" cy="60" rx="46" ry="16"/><ellipse cx="22" cy="48" rx="26" ry="16"/></g>
+    <g class="cloud b" fill="#fff" opacity=".9"><ellipse cx="0" cy="110" rx="38" ry="12"/><ellipse cx="-18" cy="100" rx="20" ry="12"/></g>
+    <g class="bird" stroke="#1f3a5f" stroke-width="3" fill="none" stroke-linecap="round"><path d="M0 40q8-10 16 0q8-10 16 0"/></g>
+    <path d="M0 230q200-70 400-20t400-30v120H0z" fill="#7ec97e"/>
+    <path d="M0 260q220-40 420-10t380-20v70H0z" fill="#5cb85c"/>
+    <!-- casa -->
+    <g transform="translate(70 150)"><rect x="0" y="40" width="110" height="80" fill="#f6c177" stroke="#1f3a5f" stroke-width="4"/><path d="M-12 44L55 0l67 44z" fill="#e76f51" stroke="#1f3a5f" stroke-width="4" stroke-linejoin="round"/><rect x="42" y="70" width="26" height="50" fill="#1f3a5f"/><rect x="12" y="62" width="22" height="22" fill="#bfe6f5" stroke="#1f3a5f" stroke-width="3"/><rect x="78" y="62" width="22" height="22" fill="#bfe6f5" stroke="#1f3a5f" stroke-width="3"/><path d="M55 22c-8-10-20 2 0 14c20-12 8-24 0-14z" fill="#fff"/></g>
+    <!-- escuela -->
+    <g transform="translate(300 105)"><rect x="0" y="40" width="200" height="105" fill="#f4b942" stroke="#1f3a5f" stroke-width="4"/><rect x="70" y="0" width="60" height="45" fill="#f9d27a" stroke="#1f3a5f" stroke-width="4"/><path d="M62 4L100-20l38 24z" fill="#2a9d8f" stroke="#1f3a5f" stroke-width="4" stroke-linejoin="round"/><path d="M100-20v-30" stroke="#1f3a5f" stroke-width="3"/><path class="flag" d="M100-50h30l-8 8l8 8h-30z" fill="#e76f51"/><circle cx="100" cy="22" r="11" fill="#fff" stroke="#1f3a5f" stroke-width="3"/><path d="M100 22v-7M100 22l5 3" stroke="#1f3a5f" stroke-width="2.5" stroke-linecap="round"/><rect x="82" y="85" width="36" height="60" fill="#1f3a5f"/><g fill="#bfe6f5" stroke="#1f3a5f" stroke-width="3"><rect x="14" y="62" width="40" height="34"/><rect x="146" y="62" width="40" height="34"/></g></g>
+    <!-- arbol y comunidad -->
+    <g transform="translate(580 150)"><rect x="34" y="60" width="14" height="60" fill="#8b5a2b" stroke="#1f3a5f" stroke-width="3"/><circle cx="41" cy="48" r="42" fill="#3f9d4a" stroke="#1f3a5f" stroke-width="4"/><circle cx="28" cy="40" r="6" fill="#e76f51"/><circle cx="56" cy="55" r="6" fill="#e76f51"/></g>
+    <!-- ninos -->
+    <g class="kid" transform="translate(215 252)"><circle r="13" cy="-34" fill="#f2c28f" stroke="#1f3a5f" stroke-width="3"/><path d="M-13-38q13-16 26 0" fill="#3b2a1d"/><rect x="-11" y="-21" width="22" height="26" rx="8" fill="#e76f51" stroke="#1f3a5f" stroke-width="3"/></g>
+    <g class="kid k2" transform="translate(255 256)"><circle r="13" cy="-34" fill="#d99a6c" stroke="#1f3a5f" stroke-width="3"/><path d="M-13-38q13-18 26 0v-6q-13-10-26 0z" fill="#1f3a5f"/><rect x="-11" y="-21" width="22" height="26" rx="8" fill="#2a9d8f" stroke="#1f3a5f" stroke-width="3"/></g>
+    <g class="kid k3" transform="translate(535 254)"><circle r="13" cy="-34" fill="#f2c28f" stroke="#1f3a5f" stroke-width="3"/><path d="M-13-38q13-16 26 0" fill="#c0392b"/><rect x="-11" y="-21" width="22" height="26" rx="8" fill="#f4b942" stroke="#1f3a5f" stroke-width="3"/></g>
+   </svg>
+  </div>
+  <p class="text-base md:text-lg leading-relaxed max-w-3xl">Un entorno seguro es un lugar donde te sientes <strong>protegido, respetado, feliz y libre de peligros</strong>. Aquí puedes aprender, jugar, opinar y ser tú mismo sin miedo. ¡Tienes derecho a estar seguro en todas partes!</p>
+  <p class="hint mt-5"><i data-i="down"></i> Toca cada tarjeta para descubrir más</p>
+  <div id="cards1" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 items-start"></div><div class="src" id="src1"></div>
+  <div class="mt-8 flex justify-end"><button onclick="switchTab(2)" class="btn3d bg-amber-400 text-slate-800">Siguiente: Explora y Aprende →</button></div>
+ </div>
+</section>
+
+<!-- FASE 2 -->
+<section id="phase-2" class="phase hidden">
+ <div class="panel">
+  <span class="tag" style="background:var(--teal)">Fase 2 · Explora y Aprende · 20 min</span>
+  <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-2" style="color:var(--navy)">Acciones Seguras vs Acciones de Riesgo</h2>
+  <p class="mb-2">Toca cada tarjeta para descubrir cómo actuar ante situaciones de la vida diaria y aprende a usar tu <strong>Semáforo del Tacto y las Emociones</strong>.</p>
+  <p class="hint mb-4"><i data-i="down"></i> Cada tarjeta se despliega con más información</p>
+  <div id="cards2" class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start"></div><div id="emerg" class="mt-8"></div><div class="src" id="src2"></div>
+  <div class="mt-8 flex justify-between">
+   <button onclick="switchTab(1)" class="btn3d bg-slate-100 text-slate-700">← Anterior</button>
+   <button onclick="switchTab(3)" class="btn3d bg-amber-400 text-slate-800">Siguiente: Retos →</button>
+  </div>
+ </div>
+</section>
+
+<!-- FASE 3 (sin cambios de contenido) -->
+<section id="phase-3" class="phase hidden space-y-6">
+ <div class="panel" style="border-color:#f59e0b">
+  <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
+   <div>
+    <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Fase 3 • Retos y Preguntas (20 minutos)</span>
+    <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mt-2">¡Pon a prueba lo que aprendiste! <i data-i="gamepad"></i></h2>
+   </div>
+   <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-2xl text-sm font-bold text-amber-800">Puntuación: <span id="score-counter" class="text-amber-600 text-lg">0</span> / <span id="total-questions">5</span></div>
+  </div>
+  <div id="quiz-container" class="mt-6"></div>
+  <div class="mt-8 flex justify-between">
+   <button onclick="switchTab(2)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3 rounded-2xl transition">← Anterior</button>
+   <button id="to-phase-4-btn" onclick="switchTab(4)" class="hidden bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg transition">Siguiente: Mi Compromiso →</button>
+  </div>
+ </div>
+</section>
+
+<!-- FASE 4 (sin cambios de contenido) -->
+<section id="phase-4" class="phase hidden space-y-6">
+ <div class="panel" style="border-color:#9333ea">
+  <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Fase 4 • Mi Compromiso (10 minutos)</span>
+  <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mt-3 mb-2">¡Haz tu Promesa de Entorno Seguro! <i data-i="star"></i></h2>
+  <p class="text-slate-600 text-base mb-6">Escribe tu nombre y selecciona una promesa para cuidar de ti y de tus amigos. Al finalizar, podrás generar y descargar tu diploma oficial.</p>
+  <div class="bg-purple-50/70 border-2 border-purple-200 rounded-2xl p-6 max-w-2xl mx-auto space-y-4 no-print">
+   <div>
+    <label class="block text-sm font-bold text-slate-700 mb-1" for="student-name">Nombre completo del alumno(a):</label>
+    <input type="text" id="student-name" placeholder="Ej. Sofía Valentina Gómez" class="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:outline-none text-slate-700 font-medium bg-white">
+   </div>
+   <div>
+    <label class="block text-sm font-bold text-slate-700 mb-1">Selecciona tu compromiso principal:</label>
+    <select id="student-promise" class="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:outline-none text-slate-700 font-medium bg-white">
+     <option value="Tratar siempre con respeto, amabilidad y empatía a mis compañeros.">Tratar siempre con respeto, amabilidad y empatía a mis compañeros.</option>
+     <option value="Decir 'NO' y buscar ayuda de un adulto si alguien me hace sentir incómodo.">Decir 'NO' y buscar ayuda de un adulto si alguien me hace sentir incómodo.</option>
+     <option value="Cuidar las áreas de mi escuela y reportar situaciones de riesgo.">Cuidar las áreas de mi escuela y reportar situaciones de riesgo.</option>
+     <option value="Ser un amigo que escucha, apoya y no participa en burlas ni bullying.">Ser un amigo que escucha, apoya y no participa en burlas ni bullying.</option>
+    </select>
+   </div>
+   <button onclick="generateDiploma()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition"><i data-i="award"></i> ¡Generar mi Diploma de Guardián Seguro!</button>
+  </div>
+  <div id="diploma-container" class="mt-8 hidden">
+   <div id="printable-diploma" class="bg-gradient-to-br from-amber-50 via-sky-50 to-emerald-50 border-8 border-sky-400 rounded-3xl p-8 md:p-12 text-center relative shadow-2xl max-w-3xl mx-auto">
+    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-amber-400 text-white rounded-full flex items-center justify-center text-3xl shadow-lg border-4 border-white"><i data-i="award"></i></div>
+    <div class="mt-4">
+     <h3 class="text-xs uppercase tracking-widest text-sky-600 font-bold mb-1">Certificado Oficial de Participación</h3>
+     <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 font-serif mb-2">¡Guardián del Entorno Seguro!</h2>
+     <p class="text-slate-500 text-sm italic">Otorgado con orgullo a:</p>
+     <div class="my-6"><h4 id="display-name" class="text-2xl md:text-3xl font-bold text-purple-700 border-b-2 border-dashed border-purple-300 pb-2 inline-block min-w-[280px]">Nombre del Alumno</h4></div>
+     <p class="text-slate-600 text-sm md:text-base max-w-lg mx-auto leading-relaxed mb-6">Por completar exitosamente el taller de 60 minutos sobre prevención de riesgos, buen trato y confianza, comprometiéndose a cumplir la siguiente promesa:</p>
+     <div class="bg-white/80 border border-sky-200 rounded-2xl p-4 max-w-xl mx-auto text-slate-700 font-medium italic text-sm md:text-base mb-8">"<span id="display-promise">Compromiso del estudiante</span>"</div>
+     <div class="flex flex-wrap justify-between items-center pt-6 border-t border-slate-200 text-xs text-slate-500 font-semibold gap-4">
+      <div class="text-center"><div class="font-serif text-base text-slate-700 font-bold">Mtra:Margarita Estrada Rodriguez</div><span>Docente de Computación</span></div>
+      <div class="w-12 h-12 bg-sky-500 text-white rounded-full flex items-center justify-center text-xl shadow"><i data-i="shield"></i></div>
+      <div class="text-center"><div id="display-date" class="font-bold text-slate-700">Fecha</div><span>Fecha de Aprobación</span></div>
+     </div>
+    </div>
+   </div>
+   <div class="flex flex-wrap justify-center gap-4 mt-6 no-print">
+    <button onclick="window.print()" class="bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg transition"><i data-i="printer"></i> Imprimir / Guardar PDF</button>
+    <button onclick="resetWorkshop()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-2xl transition"><i data-i="refresh"></i> Reiniciar Taller</button>
+   </div>
+  </div>
+  <div class="mt-8 flex justify-start no-print"><button onclick="switchTab(3)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-3 rounded-2xl transition">← Anterior</button></div>
+ </div>
+</section>
+</main>
+<footer class="text-center text-xs opacity-70 pb-6 no-print"> © 2026 MentMar | Todos los derechos reservados. </footer>
+  <script src="js/script.js"></script>
+ </body>
+</html>
